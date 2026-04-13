@@ -1,6 +1,6 @@
 # Flask SerpAPI export + testy
 
-Malá Flask aplikace, která odešle vyhledávací dotaz do **SerpAPI** (organické výsledky Google), znormalizuje položky na `title` / `url` / `snippet` a uživateli umožní **stáhnout výsledky jako JSON** (strukturovaný, strojově čitelný formát — ne HTML).
+Malá Flask aplikace, která odešle vyhledávací dotaz do **SerpAPI** (organické výsledky Google), znormalizuje položky na `title` / `url` / `snippet` a uživateli umožní **stáhnout výsledky jako JSON** (strukturovaný, strojově čitelný formát.
 
 ## Funkce
 
