@@ -1,27 +1,27 @@
-# Flask SerpAPI export + tests
+# Flask SerpAPI export + testy
 
-Small Flask app that sends a search query to **SerpAPI** (Google organic results), normalizes items to `title` / `url` / `snippet`, and lets the user **download the results as JSON** (structured, machine-readable — not HTML).
+Malá Flask aplikace, která odešle vyhledávací dotaz do **SerpAPI** (organické výsledky Google), znormalizuje položky na `title` / `url` / `snippet` a uživateli umožní **stáhnout výsledky jako JSON** (strukturovaný, strojově čitelný formát — ne HTML).
 
-## Features
+## Funkce
 
-- Single-page **HTML** form (`GET` / `POST` on `/`)
-- **SerpAPI** (`engine=google`, `organic_results` only in code)
-- **JSON** download via `Content-Disposition: attachment`
-- Validation for empty query; basic error handling for API failures
-- **pytest** unit tests with **mocked** `requests` (no live API calls in tests)
+- Jednostránkový **HTML** formulář (`GET` / `POST` na `/`)
+- **SerpAPI** (`engine=google`, v kódu jen `organic_results`)
+- Stažení **JSON** přes hlavičku `Content-Disposition: attachment`
+- Kontrola prázdného dotazu; základní ošetření chyb z API
+- Jednotkové testy **pytest** s **namockovaným** `requests` (v testech žádné živé volání API)
 
-## Live demo
+## Živá ukázka
 
 **[https://flask-serpapi-export-tests.onrender.com](https://flask-serpapi-export-tests.onrender.com)**
 
-Hosted on [Render.com](https://render.com)’s free tier: the service **spins down after idle time**. The **first request after sleep** can take **tens of seconds to about a minute** while the instance wakes — refresh or wait, then use the app as usual.
+Běží na bezplatné úrovni [Render.com](https://render.com): služba se po době nečinnosti **uspí**. **První požadavek po uspání** může trvat **desítky sekund až zhruba minutu**, než se instance probudí — obnovte stránku nebo počkejte, pak aplikaci používejte jako obvykle.
 
-## Requirements
+## Požadavky
 
 - **Python 3.9+**
-- Dependencies: `flask`, `requests`, `pytest`
+- Závislosti: `flask`, `requests`, `pytest`
 
-## Setup
+## Nastavení
 
 ```bash
 python -m venv .venv
@@ -31,9 +31,9 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## Environment
+## Prostředí (proměnné)
 
-Create a **SerpAPI** key at [serpapi.com](https://serpapi.com), then set:
+Vytvořte klíč **SerpAPI** na [serpapi.com](https://serpapi.com) a nastavte:
 
 **Windows (PowerShell)**
 
@@ -47,27 +47,29 @@ $env:SERPAPI_KEY="your_serpapi_key"
 export SERPAPI_KEY="your_serpapi_key"
 ```
 
-Or use a `.env` file (not committed) and `python-dotenv` if you add it — **never** commit real keys.
+Nebo použijte soubor `.env` (nepatří do repozitáře) a případně `python-dotenv` — **nikdy** necommitujte skutečné klíče.
 
-## Run locally
+## Lokální spuštění
 
 ```bash
 python app.py
 ```
 
-In `app.run(...)`, set **`host="127.0.0.1"`** (or `"localhost"`) so Flask listens only on your machine and matches the URL below. If you use **`host="0.0.0.0"`** (e.g. for **Render.com**), open the service URL your host gives you, not `127.0.0.1`.
+V `app.run(...)` nastavte **`host="127.0.0.1"`** (nebo `"localhost"`), aby Flask naslouchal jen na vašem počítači a sedělo to s URL níže. Pokud použijete **`host="0.0.0.0"`** (např. pro **Render.com**), otevřete URL služby od poskytovatele, ne `127.0.0.1`.
 
-For development you can use `debug=True` in `app.run`; use **`debug=False`** for any public deployment.
+Otevřete `http://127.0.0.1:5000`, zadejte dotaz, odešlete — prohlížeč by měl stáhnout JSON soubor.
 
-## Tests
+Pro vývoj můžete v `app.run` použít `debug=True`; u **veřejného nasazení** použijte **`debug=False`**.
+
+## Testy
 
 ```bash
 python -m pytest tests/ -v
 ```
 
-Tests patch `app.requests.get` and assert normalized output and error handling.
+Testy patchují `app.requests.get` a kontrolují normalizovaný výstup a ošetření chyb.
 
-## Project layout (example)
+## Rozložení projektu
 
 ```
 .
@@ -81,15 +83,3 @@ Tests patch `app.requests.get` and assert normalized output and error handling.
 └── tests/
     └── test_app.py
 ```
-
-Adjust paths to match your repo.
-
-## Deploy (optional)
-
-Free tiers (e.g. **Render**) often **sleep** when idle; first request after sleep can be slow. Use **Gunicorn** on Linux, bind to `$PORT`, set `SERPAPI_KEY` in the host’s environment. See your provider’s Flask/Python guide.
-
-## License
-
-## Acknowledgements
-
-- Search results via [SerpAPI](https://serpapi.com) (not the official Google Custom Search API).
