@@ -10,6 +10,12 @@ Small Flask app that sends a search query to **SerpAPI** (Google organic results
 - Validation for empty query; basic error handling for API failures
 - **pytest** unit tests with **mocked** `requests` (no live API calls in tests)
 
+## Live demo
+
+**[https://flask-serpapi-export-tests.onrender.com](https://flask-serpapi-export-tests.onrender.com)**
+
+Hosted on [Render.com](https://render.com)’s free tier: the service **spins down after idle time**. The **first request after sleep** can take **tens of seconds to about a minute** while the instance wakes — refresh or wait, then use the app as usual.
+
 ## Requirements
 
 - **Python 3.9+**
