@@ -12,8 +12,8 @@ Small Flask app that sends a search query to **SerpAPI** (Google organic results
 
 ## Requirements
 
-- **Python 3.9+** (uses `list[dict]` type hints)
-- Dependencies: `flask`, `requests`, `pytest` — add the latter two to `requirements.txt` if your file only lists Flask.
+- **Python 3.9+**
+- Dependencies: `flask`, `requests`, `pytest`
 
 ## Setup
 
